@@ -8,6 +8,8 @@ A fast, simple, Rust-powered programming language.
 
 **Easy to learn. Fast to run. Built for developers.**
 
+**Single-file executable • Native packages**
+
 </div>
 
 ---
@@ -42,11 +44,116 @@ Rust powers the implementation, but Rust does not execute Cherry programs. The C
 * Fast Rust-powered implementation
 * Custom parser designed for speed and simplicity
 * Native package system
-* Cross-platform support
+* Cross-platform package support
 * Easy-to-read code
 * Designed for hobbyists, students, and developers
 * Built to grow beyond Python's limitations
 * Native Rust extension support
+* Standalone executable with minimal dependencies
+
+---
+
+## Platform Support
+
+Cherry is currently developed and tested primarily on **Linux**.
+
+Current support status:
+
+| Platform | Status         |
+| -------- | -------------- |
+| Linux    | Supported      |
+| Windows  | In Development |
+| macOS    | Not planned        |
+
+Windows support is actively being worked on and will be available in a future release. While some parts of Cherry may compile or function on other operating systems, Linux is currently the only officially supported platform.
+
+As the runtime, package manager, and native package system mature, support for additional platforms will continue to expand.
+
+---
+
+## Installation
+
+Cherry is distributed as a standalone Linux ELF executable.
+
+No Rust installation, compiler, interpreter, or external runtime is required to run Cherry programs.
+
+After downloading Cherry:
+
+```bash
+chmod +x cherry
+./cherry
+```
+
+To make Cherry available system-wide from any terminal, run:
+
+```bash
+./cherry bootstrap
+```
+
+The bootstrap command installs Cherry into your PATH and performs any required first-time setup.
+
+After bootstrapping:
+
+```bash
+cherry
+```
+
+can be run from anywhere on the system.
+
+### Native Package Development
+
+Rust is **not required** to run Cherry or use existing Cherry packages.
+
+However, Rust **is required** to build native `.chy` packages.
+
+To install Rust:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Verify the installation:
+
+```bash
+rustc --version
+cargo --version
+```
+
+Cherry uses Rust's tooling to compile native packages into platform-specific libraries that can be distributed through the `.chy` package format.
+
+---
+
+## Running Programs
+
+Run a Cherry script:
+
+```bash
+cherry run main.ch
+```
+
+Create a new project:
+
+```bash
+cherry new MyProject
+```
+
+Install a package:
+
+```bash
+cherry install mathplus.chy
+```
+
+List installed packages:
+
+```bash
+cherry list
+```
+
+View available commands:
+
+```bash
+cherry help
+```
 
 ---
 
@@ -59,6 +166,7 @@ A `.chy` package is a compressed package archive containing metadata and native 
 ```text
 mathplus.chy
 ├── Ident.toml
+├── README.md
 └── bin/
 ```
 
@@ -72,13 +180,7 @@ print(mathplus.add(5, 10))
 
 Native packages are compiled for their target platforms and can provide high-performance functionality while remaining easy to use from Cherry code.
 
----
-
-## Development
-
-Cherry is primarily developed with assistance from OpenAI's GPT-5.5. Large portions of the codebase, architecture, documentation, and prototypes are generated with AI assistance.
-
-All generated code is reviewed, modified, debugged, optimized, and maintained by the me. Many systems have been manually adjusted, improved, and refactored beyond their original generated versions.
+A package may contain builds for multiple operating systems and architectures, with SHA256 verification performed during installation.
 
 ---
 
@@ -95,6 +197,16 @@ fn main() {
 
 ---
 
+## Development
+
+Cherry is primarily developed with assistance from OpenAI's GPT-5.5. Large portions of the codebase, architecture, documentation, and prototypes are generated with AI assistance.
+
+All generated code is reviewed, modified, debugged, optimized, and maintained by me. Many systems have been manually adjusted, improved, and refactored beyond their original generated versions.
+
+Cherry is an experiment in combining human creativity with AI-assisted software development.
+
+---
+
 ## Goals
 
 Cherry aims to be:
@@ -105,6 +217,8 @@ Cherry aims to be:
 * Friendly for beginners
 * Powerful enough for real projects
 * Fun to experiment with and build
+* Easy to distribute and run
+* Consistent across platforms
 
 ---
 
@@ -122,6 +236,7 @@ This includes, but is not limited to:
 * Critical infrastructure
 * Enterprise production systems
 * Security tools
+* Government systems
 
 The language, runtime, package system, APIs, and specifications may change without notice, and bugs or security issues may exist.
 
@@ -131,6 +246,6 @@ Use Cherry for learning, experimentation, hobby projects, prototypes, and explor
 
 ## Status
 
-Early Development
+**Early Development**
 
 Features, syntax, package formats, APIs, and runtime behavior are subject to change as the language evolves.
