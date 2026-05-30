@@ -249,3 +249,4 @@ Use Cherry for learning, experimentation, hobby projects, prototypes, and explor
 **Early Development**
 
 Features, syntax, package formats, APIs, and runtime behavior are subject to change as the language evolves.
+<img src="assets/logo.png" width="200" alt="Cherry Logo2">
