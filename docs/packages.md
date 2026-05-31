@@ -41,6 +41,7 @@ network = false
 process = false
 terminal = true
 keyboard = true
+window = false
 camera = false
 microphone = false
 
@@ -118,6 +119,7 @@ network = false
 process = false
 terminal = false
 keyboard = false
+window = false
 camera = false
 microphone = false
 ```
@@ -126,7 +128,8 @@ Permission enforcement is basic in v1. Cherry displays requested permissions
 during install and records them in the package manifest. Native package authors
 are expected to declare the permissions they use.
 
-`terminal` and `keyboard` are used for interactive TUI packages.
+`terminal` and `keyboard` are used for interactive TUI packages. `window` is
+used for native packages that create their own GUI windows.
 
 ## Capabilities
 

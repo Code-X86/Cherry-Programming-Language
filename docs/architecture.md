@@ -25,7 +25,7 @@ Responsibilities:
 
 - first-run bootstrap checks
 - self-install the running executable into `~/.cherry/bin` when needed
-- optional Rust installation through rustup
+- required Rust toolchain checks, with opt-in rustup installation
 - parse command-line arguments
 - dispatch commands
 - read `.ch` source files

@@ -63,8 +63,8 @@ CHERRY_SKIP_BOOTSTRAP=1 cherry doctor
 
 ## Install Rust Automatically
 
-Cherry will not silently run a remote Rust installer. To allow Rust installation
-through rustup, opt in explicitly:
+Rust is required to use Cherry. Cherry will not silently run a remote Rust
+installer. To allow Rust installation through rustup, opt in explicitly:
 
 ```sh
 CHERRY_AUTO_INSTALL_RUST=1 cherry bootstrap

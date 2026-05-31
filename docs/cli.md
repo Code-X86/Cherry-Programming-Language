@@ -34,13 +34,55 @@ Execution order:
 
 ### `cherry check <file.ch>`
 
-Lexes and parses a file without executing it.
+Lexes and parses a file without executing it. It also validates that imports are
+either built-in modules or installed packages, and warns when no `main()`
+function is present.
 
 ```sh
 target/debug/cherry check examples/tui_widgets.ch
 ```
 
 This is useful before running interactive or native package code.
+
+### `cherry fmt <file.ch>`
+
+Formats a Cherry file in place.
+
+```sh
+target/debug/cherry fmt examples/mathcore.ch
+```
+
+The v0.2.0 formatter is AST-based, so it normalizes spacing and indentation.
+Comments are not preserved yet.
+
+### `cherry repl`
+
+Starts the interactive prompt.
+
+```sh
+target/debug/cherry repl
+```
+
+Expression results print automatically. Use `:quit` or `:exit` to leave.
+
+### `cherry bootstrap`
+
+Installs or updates Cherry in the user Cherry bin directory.
+
+```sh
+target/debug/cherry bootstrap --yes
+target/debug/cherry bootstrap --target ~/.cherry/bin --no-path-edit
+```
+
+Flags: `--yes`, `--force`, `--target <path>`, and `--no-path-edit`.
+
+### `cherry --version`
+
+Prints the full release label, such as:
+
+```text
+Cherry 1.5 WindowCore
+```
 
 ### `cherry new <project-name>`
 
@@ -87,6 +129,19 @@ Current behavior is intentionally simple:
 - expects `src/main.ch`
 - copies the entry source into `build/<package-name>.ch`
 - writes `Cherry.lock`
+
+### `cherry compile <file.ch> [output]`
+
+Builds a native Linux ELF executable with the Cherry source embedded.
+
+```sh
+target/debug/cherry compile examples/mathcore.ch
+./examples/mathcore
+```
+
+The generated executable runs the embedded script immediately when launched.
+Rust and `cargo` are required to compile, but the resulting executable does not
+require the `cherry` command.
 
 ### `cherry install <package.chy>`
 
@@ -215,8 +270,10 @@ If `~/.cherry/bin` is not already on `PATH`, Cherry adds it to `.profile`,
 `.bashrc`, and `.zshrc`. It also prepends `~/.cherry/bin` to `PATH` for the
 running Cherry process. A child process cannot permanently change the parent
 shell environment, so restart the terminal or run the printed `export` command
-for the current prompt. If Rust is missing, `bootstrap` also installs Rust with
-rustup.
+for the current prompt.
+
+Rust is required to use Cherry. If Rust is missing, `bootstrap` installs Rust
+with rustup.
 
 ```sh
 cherry bootstrap
@@ -224,7 +281,8 @@ cherry bootstrap
 
 First-run behavior is more conservative: Cherry creates `~/.cherry/bin`, copies
 itself there if no `cherry` command is found, and updates shell startup files.
-It only installs Rust automatically when this environment variable is set:
+Normal commands refuse to run until Rust is installed. First-run startup only
+installs Rust automatically when this environment variable is set:
 
 ```sh
 CHERRY_AUTO_INSTALL_RUST=1

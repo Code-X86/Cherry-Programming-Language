@@ -1,5 +1,29 @@
 # Cherry Language
 
+## File Flags
+
+Cherry files can set runtime behavior with `flag` statements.
+
+```cherry
+[
+    error = "abort"
+    error_output = "stderr"
+    main = "auto"
+]
+```
+
+The block must be at the top of the file. It starts with `[` and ends with `]`.
+
+Supported flags:
+
+- `error = "abort"`: default; runtime errors stop the program.
+- `error = "continue"`: report the runtime error, skip the failing statement, and keep running.
+- `error = "ignore"`: skip failing statements silently.
+- `error_output = "stderr"`: default; continued errors print to stderr.
+- `error_output = "stdout"`: continued errors print to stdout.
+- `main = "auto"`: default; run `main()` automatically after top-level code.
+- `main = "manual"`: do not run `main()` automatically.
+
 Cherry is intentionally small. The parser is deterministic, uses braces for
 blocks, and does not depend on indentation.
 
@@ -200,4 +224,3 @@ runtime error at 2:14: division by zero
 2 |     print(10 / 0)
   |              ^
 ```
-
